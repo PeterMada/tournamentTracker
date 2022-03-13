@@ -1,2 +1,2 @@
-# tournamentTracker
+# Tournament Tracker
 Tournament tracker
