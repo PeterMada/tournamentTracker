@@ -18,3 +18,10 @@ Zápasy majú eliminačnú formu. Traja účastníci v jednej skupine. Posledný
 
 - oddelený frontend a backend
 - PostgreSQL
+
+**Podporované prehliadače:** Posledné dve verzie
+
+- Google Chrome
+- Firefox
+- Microsoft Edge
+- Opera

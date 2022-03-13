@@ -6,3 +6,6 @@
 - Express
 - React
 - NodeJS
+
+- Heroku
+- Tailwind
