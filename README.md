@@ -1,2 +1,1 @@
-# Tournament Tracker
-Tournament tracker
+# Badminton Tournament Tracker
