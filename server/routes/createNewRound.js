@@ -15,13 +15,12 @@ router.get('/', authorization, async (req, res) => {
     );
 
     // No rounds
+    let target;
     if (currentRound.rows.length === 0) {
-      const target = await pool.query(
+      target = await pool.query(
         'INSERT INTO rounds (round_month, round_year, round_current) VALUES ($1, $2, $3) RETURNING *',
         [4, 2022, true]
       );
-
-      res.json(target.rows);
     } else {
       const roundUpdate = await pool.query(
         'UPDATE rounds SET round_current = FALSE WHERE round_current = TRUE'
@@ -36,13 +35,37 @@ router.get('/', authorization, async (req, res) => {
         month = currentRound.rows[0].round_month + 1;
       }
 
-      const target = await pool.query(
+      target = await pool.query(
         'INSERT INTO rounds (round_month, round_year, round_current) VALUES ($1, $2, $3) RETURNING *',
         [month, year, true]
       );
-
-      res.json(target.rows);
     }
+
+    // generate groups for this round
+    const allUsers = await pool.query(
+      'SELECT user_id, user_first_name, user_last_name, user_active, playerScore.*  FROM users LEFT JOIN playerScore ON users.user_id = playerScore.score_player_id ORDER BY playerScore.score_total_score'
+    );
+
+    let group_level = 0;
+    const promises = allUsers.rows.map(async (user, i) => {
+      if (i % 4 === 0) {
+        group_level++;
+      }
+
+      let group = await pool.query(
+        'INSERT INTO groups (group_round_id, group_number, group_user_id) VALUES ($1, $2, $3)',
+        [target.rows[0].round_id, group_level, user.user_id]
+      );
+    });
+
+    const result = await Promise.all(promises);
+
+    // Reset all game scores
+    let score = await pool.query(
+      'UPDATE playerScore SET score_for_game = 0'
+    );
+
+    res.json(target.rows);
   } catch (err) {
     console.log(err.message);
     res.status(500).json('Server Error');

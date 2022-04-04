@@ -47,12 +47,14 @@ CREATE TABLE playerScore(
   score_total_score SMALLINT NOT NULL,
   score_for_game SMALLINT NOT NULL,
   score_for_rank  SMALLINT NOT NULL,
+  score_round_id SERIAL,
 
   CONSTRAINT fk_player FOREIGN KEY(score_player_id) REFERENCES users(user_id)
 );
 
 CREATE TABLE groups(
   group_id SERIAL PRIMARY KEY,
+  group_number SMALLINT NOT NULL,
   group_round_id SERIAL,
   group_user_id uuid, 
   

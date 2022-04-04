@@ -38,7 +38,7 @@ export const Scoreboard = () => {
                 Name
               </th>
               <th scope='col' className='px-6 py-3'>
-                Group
+                Score for rank
               </th>
               <th scope='col' className='px-6 py-3'>
                 Score in group
@@ -50,16 +50,24 @@ export const Scoreboard = () => {
           </thead>
           <tbody>
             {allScore.map((player, i) => (
-              <tr className='bg-white border-b dark:bg-gray-800 dark:border-gray-700'>
+              <tr
+                key={player.user_id}
+                className='bg-white border-b dark:bg-gray-800 dark:border-gray-700'>
                 <th
                   scope='row'
                   className='px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap'>
-                  {i}
+                  {i + 1}
                 </th>
                 <td className='px-6 py-4'>{`${player.user_first_name} ${player.user_last_name}`}</td>
-                <td className='px-6 py-4'>4</td>
-                <td className='px-6 py-4'>15</td>
-                <td className='px-6 py-4'>150</td>
+                <td className='px-6 py-4'>
+                  {player.score_for_rank ? player.score_for_rank : 0}
+                </td>
+                <td className='px-6 py-4'>
+                  {player.score_for_game ? player.score_for_game : 0}
+                </td>
+                <td className='px-6 py-4'>
+                  {player.score_total_score ? player.score_total_score : 0}
+                </td>
               </tr>
             ))}
           </tbody>
