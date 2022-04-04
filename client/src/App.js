@@ -1,0 +1,91 @@
+import React, { useState, useEffect } from 'react';
+import ReactDOM from 'react-dom';
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Redirect,
+  Navigate,
+  useNavigate,
+  useLocation,
+} from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { Register } from '../src/screen/Register';
+import { Login } from '../src/screen/Login';
+import { Dashboard } from '../src/screen/Dashboard';
+
+toast.configure();
+
+export const App = () => {
+  const [isAuthenticated, setsAuthenticated] = useState(false);
+  const setAuth = (boolean) => {
+    setsAuthenticated(boolean);
+  };
+
+  const isAuth = async () => {
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}auth/verify`,
+        {
+          metod: 'GET',
+          headers: { token: localStorage.token },
+        }
+      );
+
+      const parseRes = await response.json();
+      parseRes === true
+        ? setsAuthenticated(true)
+        : setsAuthenticated(false);
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+  useEffect(() => {
+    isAuth();
+  });
+
+  return (
+    <BrowserRouter>
+      <div className='container'>
+        <Routes>
+          <Route
+            exact
+            path='/'
+            index
+            element={
+              !isAuthenticated ? (
+                <Login setAuth={setAuth} />
+              ) : (
+                <Navigate replace to='/dashboard' />
+              )
+            }
+          />
+          <Route
+            exact
+            path='/login'
+            element={
+              !isAuthenticated ? (
+                <Login setAuth={setAuth} />
+              ) : (
+                <Navigate replace to='/dashboard' />
+              )
+            }
+          />
+          <Route
+            exact
+            path='/register'
+            element={
+              !isAuthenticated ? (
+                <Register setAuth={setAuth} />
+              ) : (
+                <Navigate replace to='/login' />
+              )
+            }
+          />
+        </Routes>
+      </div>
+    </BrowserRouter>
+  );
+};

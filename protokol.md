@@ -60,9 +60,9 @@ Sezóna trvá 4 mesiace (jar, leto, jeseň, zima). Každý sezóna má 4 kolá (
 
 - [x] Analýza a návrh (3h)
 - [x] Zoznámenie sa s technologiami (3h)
-- [ ] Návrh DB (3h)
-- [ ] Príprava backendu (3h)
-- [ ] Priprava frontendu (3h)
+- [x] Návrh DB (3h)
+- [x] Príprava backendu (3h)
+- [x] Priprava frontendu (3h)
 - [ ] Vytvorenie routes pre API (3h)
 - [ ] Prihlásnie a registrácia (3h)
 - [ ] Dashboard (3h)
