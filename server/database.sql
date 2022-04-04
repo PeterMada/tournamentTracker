@@ -11,18 +11,11 @@ CREATE TABLE users(
   user_email VARCHAR(255) NOT NULL,
   user_password VARCHAR(255) NOT NULL,
   user_email_verified BOOLEAN,
+  user_active BOOLEAN DEFAULT FALSE,
   user_date_created DATE,
   user_last_login DATE,
-  user_group SMALLINT,
+  user_deleted BOOLEAN DEFAULT FALSE,
   PRIMARY KEY (user_id)
-);
-
-CREATE TABLE playerScore(
-  score_id SERIAL PRIMARY KEY,
-  score_player_id uuid,
-  score_total_socre SMALLINT NOT NULL,
-  score_for_game SMALLINT NOT NULL,
-  score_for_rank  SMALLINT NOT NULL,
 );
 
 CREATE TABLE rounds(
@@ -31,15 +24,6 @@ CREATE TABLE rounds(
   round_year SMALLINT NOT NULL,
   round_current BOOLEAN DEFAULT FALSE, 
 );
-
-CREATE TABLE groups(
-  group_id SERIAL PRIMARY KEY,
-  round_id SERIAL,
-  user_one_id uuid,
-  user_two_id uuid,
-  user_three_id uuid,
-  user_four_id uuid,
-)
 
 
 CREATE TABLE scoreInRounds (
@@ -50,5 +34,28 @@ CREATE TABLE scoreInRounds (
   sr_player_two_score posibleScore,
   sr_date_played DATE,
   sr_round_id SERIAL,
-  sr_group_id SMALLINT
+  sr_group_id SMALLINT,
+
+  CONSTRAINT fk_player_one FOREIGN KEY(sr_player_one_id) REFERENCES users(user_id),
+  CONSTRAINT fk_player_two FOREIGN KEY(sr_player_two_id) REFERENCES users(user_id)
+);
+
+
+CREATE TABLE playerScore(
+  score_id SERIAL PRIMARY KEY,
+  score_player_id uuid,
+  score_total_score SMALLINT NOT NULL,
+  score_for_game SMALLINT NOT NULL,
+  score_for_rank  SMALLINT NOT NULL,
+
+  CONSTRAINT fk_player FOREIGN KEY(score_player_id) REFERENCES users(user_id)
+);
+
+CREATE TABLE groups(
+  group_id SERIAL PRIMARY KEY,
+  group_round_id SERIAL,
+  group_user_id uuid, 
+  
+  CONSTRAINT fk_player FOREIGN KEY(group_user_id) REFERENCES users(user_id),
+  CONSTRAINT fk_round FOREIGN KEY(group_round_id) REFERENCES rounds(round_id)
 )

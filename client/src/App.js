@@ -84,6 +84,17 @@ export const App = () => {
               )
             }
           />
+          <Route
+            exact
+            path='/dashboard'
+            element={
+              isAuthenticated ? (
+                <Dashboard setAuth={setAuth} />
+              ) : (
+                <Navigate replace to='/login' />
+              )
+            }
+          />
         </Routes>
       </div>
     </BrowserRouter>

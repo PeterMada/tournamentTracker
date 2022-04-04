@@ -25,9 +25,21 @@ router.post('/register', validInfo, async (req, res) => {
     const bcryptPassword = await bcrypt.hash(password, salt);
 
     const newUser = await pool.query(
-      'INSERT INTO users (user_first_name, user_last_name, user_email, user_password) VALUES ($1, $2, $3, $4) RETURNING *',
-      [firstName, lastName, email, bcryptPassword]
+      'INSERT INTO users (user_first_name, user_last_name, user_email, user_active, user_password) VALUES ($1, $2, $3, $4, $5) RETURNING *',
+      [firstName, lastName, email, false, bcryptPassword]
     );
+
+    const playerScore = await pool.query(
+      'INSERT INTO playerScore (score_player_id, score_total_score, score_for_game, score_for_rank) VALUES ($1, $2, $3, $4) RETURNING *',
+      [newUser.rows[0].user_id, lastName, email, false, bcryptPassword]
+    );
+
+    /*
+    const playerScore = await pool.query(
+      'INSERT INTO playerScore (score_player_id, score_total_score, score_for_game, score_for_rank) VALUES ($1, $2, $3, $4) RETURNING *',
+      [newUser.rows[0].user_id, 0, 0, 0]
+    );
+    */
 
     const token = jwtGenerator(newUser.rows[0].user_id);
 

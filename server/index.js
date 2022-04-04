@@ -11,6 +11,10 @@ app.use(express.json());
 app.use('/auth', require('./routes/jwtAuth'));
 app.use('/dashobard', require('./routes/dashboard'));
 
+app.use('/myGroup', require('./routes/myGroup'));
+
+app.use('/createNewRound', require('./routes/createNewRound'));
+
 app.listen(process.env.PORT || 5000, () => {
   console.log(`Server started succesfully`);
 });
