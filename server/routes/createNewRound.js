@@ -36,6 +36,15 @@ router.get('/', authorization, async (req, res) => {
         [month, year, true]
       );
     }
+    // Add match score + table score to sum score
+    const allUsersScores = await pool.query(
+      'SELECT * FROM playerScore WHERE score_round_id = $1',
+      [currentRound.rows[0].round_id]
+    );
+
+    const promiseScore = allUsersScores.rows.map((userScore) => {
+      console.log(userScore);
+    });
 
     // generate groups for this round
     const allUsers = await pool.query(
@@ -61,104 +70,43 @@ router.get('/', authorization, async (req, res) => {
       [target.rows[0].round_id]
     );
 
-    const numberOfGroups = ~~(allUsers.rows.length / 5);
+    const numberOfGroups =
+      allUsers.rows.length > 4 ? ~~(allUsers.rows.length / 5) : 1;
     const numberOfPlayersInLastGroup = allUsers.rows.length % 5;
 
-    for (let i = 1; i <= numberOfGroups; i++) {
-      // get all players from this group
+    // create score table for group
+    for (let k = 1; k <= numberOfGroups; k++) {
       const currentGroups = await pool.query(
         'SELECT group_user_id, group_id FROM groups WHERE group_round_id = $1 AND group_number = $2',
-        [target.rows[0].round_id, i]
+        [target.rows[0].round_id, k]
       );
 
-      // create score table for group
-      if (currentGroups.rows.length === 5) {
-        const returnPromise = currentGroups.rows.map(async (user, j) => {
-          console.log(j);
-          switch (j + 1) {
-            case 1:
-              let group01 = await pool.query(
-                'INSERT INTO scoreInRounds (sr_player_one_id, sr_player_two_id, sr_player_one_score, sr_player_two_score, sr_round_id, sr_group_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
-                [
-                  currentGroups.rows[0].group_user_id,
-                  currentGroups.rows[1].group_user_id,
-                  '-',
-                  '-',
-                  target.rows[0].round_id,
-                  i,
-                ]
-              );
-              let group02 = await pool.query(
-                'INSERT INTO scoreInRounds (sr_player_one_id, sr_player_two_id, sr_player_one_score, sr_player_two_score, sr_round_id, sr_group_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
-                [
-                  currentGroups.rows[0].group_user_id,
-                  currentGroups.rows[2].group_user_id,
-                  '-',
-                  '-',
-                  target.rows[0].round_id,
-                  i,
-                ]
-              );
-              let group03 = await pool.query(
-                'INSERT INTO scoreInRounds (sr_player_one_id, sr_player_two_id, sr_player_one_score, sr_player_two_score, sr_round_id, sr_group_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
-                [
-                  currentGroups.rows[0].group_user_id,
-                  currentGroups.rows[3].group_user_id,
-                  '-',
-                  '-',
-                  target.rows[0].round_id,
-                  i,
-                ]
-              );
+      const currentGroupLength = currentGroups.rows.length;
 
-              break;
-            case 2:
-              let group12 = await pool.query(
-                'INSERT INTO scoreInRounds (sr_player_one_id, sr_player_two_id, sr_player_one_score, sr_player_two_score, sr_round_id, sr_group_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
-                [
-                  currentGroups.rows[1].group_user_id,
-                  currentGroups.rows[2].group_user_id,
-                  '-',
-                  '-',
-                  target.rows[0].round_id,
-                  i,
-                ]
-              );
-              let group13 = await pool.query(
-                'INSERT INTO scoreInRounds (sr_player_one_id, sr_player_two_id, sr_player_one_score, sr_player_two_score, sr_round_id, sr_group_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
-                [
-                  currentGroups.rows[1].group_user_id,
-                  currentGroups.rows[3].group_user_id,
-                  '-',
-                  '-',
-                  target.rows[0].round_id,
-                  i,
-                ]
-              );
-              break;
-            case 3:
-              let group23 = await pool.query(
-                'INSERT INTO scoreInRounds (sr_player_one_id, sr_player_two_id, sr_player_one_score, sr_player_two_score, sr_round_id, sr_group_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
-                [
-                  currentGroups.rows[2].group_user_id,
-                  currentGroups.rows[3].group_user_id,
-                  '-',
-                  '-',
-                  target.rows[0].round_id,
-                  i,
-                ]
-              );
-              break;
+      let j = 0;
+      for (let i = 1; i < currentGroupLength; i++) {
+        j = i + 1;
+        for (j; j <= currentGroupLength; j++) {
+          if (i !== j) {
+            let group = await pool.query(
+              'INSERT INTO scoreInRounds (sr_player_one_id, sr_player_two_id, sr_player_one_score, sr_player_two_score, sr_round_id, sr_group_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
+              [
+                currentGroups.rows[i].group_user_id,
+                currentGroups.rows[j].group_user_id,
+                '-',
+                '-',
+                target.rows[j].round_id,
+                i,
+              ]
+            );
           }
-        });
-
-        const scoreTable = await Promise.all(returnPromise);
+        }
       }
     }
 
     // Reset all game scores
     let score = await pool.query(
-      'UPDATE playerScore SET score_for_game = 0'
+      'UPDATE playerScore SET score_for_game = 0 AND score_for_rank = 0'
     );
 
     res.json(target.rows);

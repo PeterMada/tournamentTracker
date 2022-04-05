@@ -64,7 +64,12 @@ router.post('/', validinfo, async (req, res) => {
 
     const scoreInsert = await pool.query(
       'UPDATE scoreInRounds SET sr_player_one_score = $2, sr_player_two_score = $3, sr_date_played = $4  WHERE sr_id = $1 RETURNING *',
-      [scoreId, playerOneScore, playerTwoScore, new Date().toISOString()]
+      [
+        scoreId,
+        playerOneScore.toUpperCase(),
+        playerTwoScore.toUpperCase(),
+        new Date().toISOString(),
+      ]
     );
 
     const currentRound = await pool.query(
@@ -73,12 +78,12 @@ router.post('/', validinfo, async (req, res) => {
 
     const playerOneTotalScore = await pool.query(
       'UPDATE playerScore SET score_for_game = $1 WHERE score_player_id = $2 AND score_round_id = $3',
-      [playerOneScore, firstPlayerId, currentRound.rows[0].round_id]
+      [scoreForFirstPlayer, firstPlayerId, currentRound.rows[0].round_id]
     );
 
     const playerTwoTotalScore = await pool.query(
       'UPDATE playerScore SET score_for_game = $1 WHERE score_player_id = $2 AND score_round_id = $3',
-      [playerTwoScore, secondPlayerId, currentRound.rows[0].round_id]
+      [scoreForSecondPlayer, secondPlayerId, currentRound.rows[0].round_id]
     );
 
     res.json(scoreInsert.rows[0]);
