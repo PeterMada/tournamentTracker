@@ -15,6 +15,7 @@ import { Register } from '../src/screen/Register';
 import { Login } from '../src/screen/Login';
 import { Dashboard } from '../src/screen/Dashboard';
 import { Scoreboard } from './screen/Scoreboard';
+import { RecordScore } from './screen/RecordScore';
 
 toast.configure();
 
@@ -102,6 +103,17 @@ export const App = () => {
             element={
               isAuthenticated ? (
                 <Scoreboard />
+              ) : (
+                <Navigate replace to='/login' />
+              )
+            }
+          />
+          <Route
+            exact
+            path='/recordScore/:id'
+            element={
+              isAuthenticated ? (
+                <RecordScore />
               ) : (
                 <Navigate replace to='/login' />
               )

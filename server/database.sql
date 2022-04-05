@@ -2,7 +2,7 @@ CREATE DATABASE TournamentTracker;
 
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
-CREATE TYPE posibleScore AS ENUM ('S', '0', '1', '2', '3');
+CREATE TYPE posibleScore AS ENUM ('S', '0', '1', '2', '3', '-');
 
 CREATE TABLE users(
   user_id uuid DEFAULT uuid_generate_v4(),
