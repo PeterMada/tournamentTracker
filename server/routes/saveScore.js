@@ -80,6 +80,9 @@ router.post('/', validinfo, async (req, res) => {
       'UPDATE playerScore SET score_for_game = $1 WHERE score_player_id = $2 AND score_round_id = $3',
       [scoreForFirstPlayer, firstPlayerId, currentRound.rows[0].round_id]
     );
+    console.log(scoreForFirstPlayer);
+    console.log(firstPlayerId);
+    console.log(currentRound.rows[0].round_id);
 
     const playerTwoTotalScore = await pool.query(
       'UPDATE playerScore SET score_for_game = $1 WHERE score_player_id = $2 AND score_round_id = $3',

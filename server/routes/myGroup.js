@@ -9,10 +9,9 @@ router.get('/', authorization, async (req, res) => {
     const currentRound = await pool.query(
       'SELECT * FROM rounds WHERE round_current = TRUE'
     );
-    console.log(currentRound.rows[0].round_id);
 
     const currentUser = await pool.query(
-      'SELECT * FROM users WHERE  user_id = $1',
+      'SELECT * FROM users WHERE user_id = $1',
       [currentLogedUser]
     );
 
@@ -29,6 +28,8 @@ router.get('/', authorization, async (req, res) => {
     const users = await pool.query(
       'SELECT user_id, user_first_name, user_last_name, user_email FROM users WHERE user_active = true'
     );
+
+    console.log(myGroup.rows);
 
     res.json({ myGroup: myGroup.rows, users: users.rows });
   } catch (err) {
