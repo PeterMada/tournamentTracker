@@ -119,11 +119,15 @@ export const Dashboard = ({ setAuth }) => {
                       </span>
                     </td>
                     <td className='px-6 py-4 text-right'>
-                      <Link
-                        to={`/recordScore/${group.sr_id}`}
-                        className='font-medium text-blue-600 dark:text-blue-500 hover:underline'>
-                        Add score
-                      </Link>
+                      {group.sr_player_one_score != '-' ? (
+                        ''
+                      ) : (
+                        <Link
+                          to={`/recordScore/${group.sr_id}`}
+                          className='font-medium text-blue-600 dark:text-blue-500 hover:underline'>
+                          Add score
+                        </Link>
+                      )}
                     </td>
                   </tr>
                 );

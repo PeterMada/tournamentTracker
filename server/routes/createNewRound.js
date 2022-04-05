@@ -10,12 +10,6 @@ router.get('/', authorization, async (req, res) => {
       'SELECT * FROM rounds WHERE round_current = TRUE'
     );
 
-    /*
-    const activeAllUsers = await pool.query(
-      'UPDATE users SET user_active = TRUE WHERE user_active = FALSE'
-    );
-    */
-
     // No rounds
     let target;
     if (currentRound.rows.length === 0) {
@@ -50,7 +44,7 @@ router.get('/', authorization, async (req, res) => {
 
     let group_level = 0;
     const promises = allUsers.rows.map(async (user, i) => {
-      if (i % 4 === 0) {
+      if (i % 5 === 0) {
         group_level++;
       }
 
@@ -67,8 +61,8 @@ router.get('/', authorization, async (req, res) => {
       [target.rows[0].round_id]
     );
 
-    const numberOfGroups = ~~(allUsers.rows.length / 4);
-    const numberOfPlayersInLastGroup = allUsers.rows.length % 4;
+    const numberOfGroups = ~~(allUsers.rows.length / 5);
+    const numberOfPlayersInLastGroup = allUsers.rows.length % 5;
 
     for (let i = 1; i <= numberOfGroups; i++) {
       // get all players from this group
@@ -78,7 +72,7 @@ router.get('/', authorization, async (req, res) => {
       );
 
       // create score table for group
-      if (currentGroups.rows.length === 4) {
+      if (currentGroups.rows.length === 5) {
         const returnPromise = currentGroups.rows.map(async (user, j) => {
           console.log(j);
           switch (j + 1) {

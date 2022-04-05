@@ -33,7 +33,7 @@ CREATE TABLE scoreInRounds (
   sr_player_one_score posibleScore,
   sr_player_two_score posibleScore,
   sr_date_played DATE,
-  sr_round_id SERIAL,
+  sr_round_id SMALLINT NOT NULL,
   sr_group_id SMALLINT,
 
   CONSTRAINT fk_player_one FOREIGN KEY(sr_player_one_id) REFERENCES users(user_id),
@@ -47,7 +47,7 @@ CREATE TABLE playerScore(
   score_total_score SMALLINT NOT NULL,
   score_for_game SMALLINT NOT NULL,
   score_for_rank  SMALLINT NOT NULL,
-  score_round_id SERIAL,
+  score_round_id SMALLINT NOT NULL,
 
   CONSTRAINT fk_player FOREIGN KEY(score_player_id) REFERENCES users(user_id)
 );
@@ -55,7 +55,7 @@ CREATE TABLE playerScore(
 CREATE TABLE groups(
   group_id SERIAL PRIMARY KEY,
   group_number SMALLINT NOT NULL,
-  group_round_id SERIAL,
+  group_round_id SMALLINT NOT NULL,
   group_user_id uuid, 
   
   CONSTRAINT fk_player FOREIGN KEY(group_user_id) REFERENCES users(user_id),
