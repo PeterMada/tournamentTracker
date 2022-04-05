@@ -14,7 +14,6 @@ router.get('/', authorization, async (req, res) => {
     const activeAllUsers = await pool.query(
       'UPDATE users SET user_active = true RETURNING user_id'
     );
-
     // No rounds
     let target;
     if (currentRound.rows.length === 0) {
@@ -52,7 +51,6 @@ router.get('/', authorization, async (req, res) => {
         userScore.score_total_score +
         userScore.score_for_game +
         userScore.score_for_rank;
-
       let score = await pool.query(
         'UPDATE playerScore SET score_for_game = 0, score_for_rank = 0, score_total_score = $1 WHERE score_id = $2',
         [totalPlayerScore, userScore.score_id]
@@ -90,6 +88,7 @@ router.get('/', authorization, async (req, res) => {
     const numberOfPlayersInLastGroup = allUsers.rows.length % 5;
 
     // create score table for group
+    const currentRoundId = target.rows[0].round_id;
     for (let k = 1; k <= numberOfGroups; k++) {
       const currentGroups = await pool.query(
         'SELECT group_user_id, group_id, group_round_id FROM groups WHERE group_round_id = $1 AND group_number = $2',
@@ -99,6 +98,7 @@ router.get('/', authorization, async (req, res) => {
       const currentGroupLength = currentGroups.rows.length;
 
       let j = 0;
+
       for (let i = 0; i < currentGroupLength; i++) {
         j = i + 1;
         for (j; j < currentGroupLength; j++) {
@@ -110,7 +110,7 @@ router.get('/', authorization, async (req, res) => {
                 currentGroups.rows[j].group_user_id,
                 '-',
                 '-',
-                currentGroups.rows[i].group_round_id,
+                currentRoundId,
                 i,
               ]
             );
@@ -120,7 +120,6 @@ router.get('/', authorization, async (req, res) => {
     }
 
     // Create new score table for round
-    console.log('new ROund');
     const newScoreTableForRound = activeAllUsers.rows.map(
       async (user, i) => {
         const playerTotalScore = await pool.query(
