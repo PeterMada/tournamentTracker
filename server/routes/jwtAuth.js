@@ -33,9 +33,21 @@ router.post('/register', validInfo, async (req, res) => {
       'SELECT * FROM rounds WHERE round_current = TRUE'
     );
 
+    let currentRoundId = 0;
+
+    if (currentRound.rows.length === 0) {
+      target = await pool.query(
+        'INSERT INTO rounds (round_month, round_year, round_current) VALUES ($1, $2, $3) RETURNING *',
+        [4, 2022, true]
+      );
+      currentRoundId = target.rows[0].round_id;
+    } else {
+      currentRoundId = currentRound.rows[0].round_id;
+    }
+
     const playerScore = await pool.query(
       'INSERT INTO playerScore (score_player_id, score_total_score, score_for_game, score_for_rank, score_round_id) VALUES ($1, $2, $3, $4, $5) RETURNING *',
-      [newUser.rows[0].user_id, 0, 0, 0, currentRound.rows[0].round_id]
+      [newUser.rows[0].user_id, 0, 0, 0, currentRoundId]
     );
 
     const token = jwtGenerator(newUser.rows[0].user_id);

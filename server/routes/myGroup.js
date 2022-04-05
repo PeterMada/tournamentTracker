@@ -29,8 +29,6 @@ router.get('/', authorization, async (req, res) => {
       'SELECT user_id, user_first_name, user_last_name, user_email FROM users WHERE user_active = true'
     );
 
-    console.log(myGroup.rows);
-
     res.json({ myGroup: myGroup.rows, users: users.rows });
   } catch (err) {
     console.log(err.message);

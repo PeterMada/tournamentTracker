@@ -12,7 +12,7 @@ router.get('/', authorization, async (req, res) => {
 
     // Active all users
     const activeAllUsers = await pool.query(
-      'UPDATE users SET user_active = true'
+      'UPDATE users SET user_active = true RETURNING user_id'
     );
 
     // No rounds
@@ -120,6 +120,7 @@ router.get('/', authorization, async (req, res) => {
     }
 
     // Create new score table for round
+    console.log('new ROund');
     const newScoreTableForRound = activeAllUsers.rows.map(
       async (user, i) => {
         const playerTotalScore = await pool.query(
@@ -127,11 +128,16 @@ router.get('/', authorization, async (req, res) => {
           [user.user_id, currentRound.rows[0].round_id]
         );
 
+        const playerTotalScoreValue =
+          playerTotalScore.rows.length > 0
+            ? playerTotalScore.rows[0].score_total_score
+            : 0;
+
         let score = await pool.query(
           'INSERT INTO playerScore (score_player_id, score_total_score, score_for_game, score_for_rank, score_round_id) VALUES ($1, $2, $3, $4, $5)',
           [
             user.user_id,
-            playerTotalScore.rows[0].score_total_score,
+            playerTotalScoreValue,
             0,
             0,
             target.rows[0].round_id,
