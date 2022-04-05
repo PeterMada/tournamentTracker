@@ -6,6 +6,13 @@ export const Dashboard = ({ setAuth }) => {
   const [myGroup, setMyGroup] = useState([]);
   const [users, setUsers] = useState([]);
 
+  const logout = (e) => {
+    e.preventDefault();
+    localStorage.removeItem('token');
+    setAuth(false);
+    toast.success('Logged out sucessfully');
+  };
+
   useEffect(() => {
     const fetchMyGroup = async () => {
       const response = await fetch(
@@ -140,6 +147,12 @@ export const Dashboard = ({ setAuth }) => {
       )}
 
       <div className='mt-10'>
+        <button
+          className='bg-blue-500 ml-2 mr-2 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
+          onClick={logout}>
+          Log out
+        </button>
+
         <Link
           className='bg-blue-500 ml-2 mr-2 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
           to='/newSeason'
