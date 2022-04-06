@@ -72,3 +72,19 @@ Posledné dve verzie
 ⬜️ Refaktoring (3h)  
 ⬜️ Testovanie (2h)  
 ⬜️ Nasadenie (1h)  
+
+<br/><br/>
+<br/><br/>
+
+# Analýza požiadaviek
+
+## Nefunkcionálne požiadavky
+- Spoľahlivosť
+  - Dostupnosť systému
+- Použiteľnosť
+- Lokalizácia
+- Výkon
+- Konzistencia
+- Rozhranie
+
+## Funkcionálne požiadavky
