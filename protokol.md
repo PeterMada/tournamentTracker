@@ -21,52 +21,52 @@ Sezóna trvá 4 mesiace (jar, leto, jeseň, zima). Každý sezóna má 4 kolá (
 - PostgreSQL
 
 **Podporované prehliadače:** Posledné dve verzie
-✅ Google Chrome
-✅ Firefox
-✅ Microsoft Edge
-✅ Opera
+✅ Google Chrome  
+✅ Firefox  
+✅ Microsoft Edge  
+✅ Opera  
 
 
 # Požiadavky :hammer:
 
-✅ oddelený frontend a backend (REST Api)
-⬜️ možnosť vytvárať časový harmonogram
-✅ pridávanie sútažiacich
-✅ pridávanie bodov za zápas
-⬜️ vytváranie tabuliek
-⬜️ export dát
-✅ ukladanie dát
-✅ dôraz na UX
-✅ jednoduché UI
-✅ dostupnosť (accessibility)
-✅ responzívnosť
-✅ dodržanie bežných štandardov
+✅ oddelený frontend a backend (REST Api)  
+⬜️ možnosť vytvárať časový harmonogram  
+✅ pridávanie sútažiacich  
+✅ pridávanie bodov za zápas  
+⬜️ vytváranie tabuliek  
+⬜️ export dát  
+✅ ukladanie dát  
+✅ dôraz na UX  
+✅ jednoduché UI  
+✅ dostupnosť (accessibility)  
+✅ responzívnosť  
+✅ dodržanie bežných štandardov  
 ✅ podpora pre najnovšie prehliadače
 
 
 # Použité technológie
 
 ###### PERN - stack
-✅ PostgreSQL
-✅ Express
-✅ React
-✅ NodeJS
-✅ Heroku
-✅ Tailwind
+✅ PostgreSQL  
+✅ Express  
+✅ React  
+✅ NodeJS  
+✅ Heroku  
+✅ Tailwind  
 
 
 # Časový harmonogram
 
-✅ Analýza a návrh (3h)
-✅ Zoznámenie sa s technologiami (3h)
-✅ Návrh DB (3h)
-✅ Príprava backendu (3h)
-✅ Priprava frontendu (3h)
-✅ Vytvorenie routes pre API (3h)
-✅ Prihlásnie a registrácia (3h)
-✅ Dashboard (3h)
-✅ Pridanie formulárov (3h)
-✅ Vyhodnocovanie dát (3h)
-⬜️ Refaktoring (3h)
-⬜️ Testovanie (3h)
-⬜️ Nasadenie (3h)
+✅ Analýza a návrh (3h)  
+✅ Zoznámenie sa s technologiami (3h)  
+✅ Návrh DB (3h)  
+✅ Príprava backendu (3h)  
+✅ Priprava frontendu (3h)  
+✅ Vytvorenie routes pre API (3h)  
+✅ Prihlásnie a registrácia (3h)  
+✅ Dashboard (3h)  
+✅ Pridanie formulárov (3h)  
+✅ Vyhodnocovanie dát (3h)  
+⬜️ Refaktoring (3h)  
+⬜️ Testovanie (3h)  
+⬜️ Nasadenie (3h)  
