@@ -1,4 +1,4 @@
-# Scenár :scroll:  
+# :scroll: Scenár   
 
 Webová aplikácia na zaznamenávanie a vyhodnocovanie výsledkov zápasov badmintonu. (inšpirácia https://www.vaseliga.cz)
 Hlavnou úlohou tejto aplikácie je zaznamenávať výsledky jednotlivých zápasov.
@@ -21,7 +21,7 @@ Sezóna trvá 4 mesiace (jar, leto, jeseň, zima). Každý sezóna má 4 kolá (
 - PostgreSQL
 <br/><br/>
 
-**Podporované prehliadače:** :anchor: 
+**:anchor:Podporované prehliadače**  <br/>
 Posledné dve verzie  
 ✅ Google Chrome  
 ✅ Firefox  
@@ -29,7 +29,7 @@ Posledné dve verzie
 ✅ Opera  
 <br/><br/>
 
-# Požiadavky :hammer:
+# :hammer: Požiadavky 
 
 ✅ oddelený frontend a backend (REST Api)  
 ⬜️ možnosť vytvárať časový harmonogram  
@@ -46,7 +46,7 @@ Posledné dve verzie
 ✅ podpora pre najnovšie prehliadače
 <br/><br/>
 
-# Použité technológie :pushpin: 
+# :pushpin: Použité technológie  
 
 ###### PERN - stack
 ✅ PostgreSQL  
@@ -57,7 +57,7 @@ Posledné dve verzie
 ✅ Tailwind  
 <br/><br/>
 
-# Časový harmonogram :calendar:  
+# :calendar: Časový harmonogram   
 
 ✅ Analýza a návrh (3h)  
 ✅ Zoznámenie sa s technologiami (3h)  
