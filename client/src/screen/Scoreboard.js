@@ -32,7 +32,7 @@ export const Scoreboard = () => {
     <p>Loading....</p>
   ) : (
     <>
-      <h1 className='font-medium leading-tight text-5xl mt-0 mb-2 text-blue-600'>
+      <h1 className='font-medium leading-tight text-5xl mt-0 mb-10 text-blue-600'>
         Total Scoreboard for{' '}
         {`${roundDetail.round_month}. ${roundDetail.round_year}`}
       </h1>
