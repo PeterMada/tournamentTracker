@@ -72,3 +72,41 @@ Posledné dve verzie
 ⬜️ Refaktoring (3h)  
 ⬜️ Testovanie (2h)  
 ⬜️ Nasadenie (1h)  
+
+<br/><br/>
+<br/><br/>
+
+# :crown: Analýza požiadaviek
+
+## :memo: Nefunkcionálne požiadavky
+- Spoľahlivosť
+  - Dostupnosť systému
+  - Miera poruchovosti
+  - Pravdepodobnosť strát dát
+  - Robustnosť systému
+- Použiteľnosť
+  - Doba zaškolenia
+  - Intuitívnosť ovládania
+  - Nápoveda
+- Lokalizácia
+  - Základný jazyk - angličtina
+- Výkon
+  - Doba odozvy
+  - Lighthouse skóre
+  - Počet súbežne pracujúcich 
+- Konzistencia
+  - Design systému
+  - Konzistencia terminológie
+- Rozhranie
+ - Mobilné zobrazenie
+ - Zobrazenie na desktopu
+
+## :pencil: Funkcionálne požiadavky
+**Registrácia** – do systému je možné sa zaregistrovať pomocou emailu a hesla.  
+**Prihlásenie** – do systému je možné sa prihlásiť pomocou emailu a hesla.  
+**Odhlásenie zo systému** - užívateľ má možnosť sa odhlásiť zo systému.  
+**Zadanie skóre** – každý hráč môže v každom kole zadať skóre k svojim zápasom v skupine.  
+**Zobrazenie skupiny** – hráč môže zobraziť svoju skupinu kde uvidí mená a emailové adresy ostatných hráčov v skupine.  
+**Zobrazenie celkového skóre** – hráč si môže zobraziť tabuľku  aktuálneho poradia.  
+**Vygenerovanie nového kola** – administrátor má možnosť vygenerovať nové kolo.  
+**Generovanie nového kola systémom** – nové kolo generuje systém vždy na začiatku mesiaca.  
