@@ -76,9 +76,9 @@ Posledné dve verzie
 <br/><br/>
 <br/><br/>
 
-# Analýza požiadaviek
+# :crown: Analýza požiadaviek
 
-## Nefunkcionálne požiadavky
+## :memo: Nefunkcionálne požiadavky
 - Spoľahlivosť
   - Dostupnosť systému
   - Miera poruchovosti
@@ -101,12 +101,12 @@ Posledné dve verzie
  - Mobilné zobrazenie
  - Zobrazenie na desktopu
 
-## Funkcionálne požiadavky
-**Registrácia** – do systému je možné sa zaregistrovať pomocou emailu a hesla.
-**Prihlásenie** – do systému je možné sa prihlásiť pomocou emailu a hesla.
-**Odhlásenie zo systému** - užívateľ má možnosť sa odhlásiť zo systému.
-**Zadanie skóre** – každý hráč môže v každom kole zadať skóre k svojim zápasom v skupine.
-**Zobrazenie skupiny** – hráč môže zobraziť svoju skupinu kde uvidí mená a emailové adresy ostatných hráčov v skupine.
-**Zobrazenie celkového skóre** – hráč si môže zobraziť tabuľku  aktuálneho poradia.
-**Vygenerovanie nového kola** – administrátor má možnosť vygenerovať nové kolo.
-**Generovanie nového kola systémom** – nové kolo generuje systém vždy na začiatku mesiaca.
+## :pencil: Funkcionálne požiadavky
+**Registrácia** – do systému je možné sa zaregistrovať pomocou emailu a hesla.  
+**Prihlásenie** – do systému je možné sa prihlásiť pomocou emailu a hesla.  
+**Odhlásenie zo systému** - užívateľ má možnosť sa odhlásiť zo systému.  
+**Zadanie skóre** – každý hráč môže v každom kole zadať skóre k svojim zápasom v skupine.  
+**Zobrazenie skupiny** – hráč môže zobraziť svoju skupinu kde uvidí mená a emailové adresy ostatných hráčov v skupine.  
+**Zobrazenie celkového skóre** – hráč si môže zobraziť tabuľku  aktuálneho poradia.  
+**Vygenerovanie nového kola** – administrátor má možnosť vygenerovať nové kolo.  
+**Generovanie nového kola systémom** – nové kolo generuje systém vždy na začiatku mesiaca.  
