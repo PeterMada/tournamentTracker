@@ -19,6 +19,7 @@ Sezóna trvá 4 mesiace (jar, leto, jeseň, zima). Každý sezóna má 4 kolá (
 **Kľúčové vlastnosti:**
 - oddelený frontend a backend
 - PostgreSQL
+<br/><br/>
 
 **Podporované prehliadače:** :anchor: 
 Posledné dve verzie  
@@ -26,7 +27,7 @@ Posledné dve verzie
 ✅ Firefox  
 ✅ Microsoft Edge  
 ✅ Opera  
-
+<br/><br/>
 
 # Požiadavky :hammer:
 
@@ -43,7 +44,7 @@ Posledné dve verzie
 ✅ responzívnosť  
 ✅ dodržanie bežných štandardov  
 ✅ podpora pre najnovšie prehliadače
-
+<br/><br/>
 
 # Použité technológie :pushpin: 
 
@@ -54,7 +55,7 @@ Posledné dve verzie
 ✅ NodeJS  
 ✅ Heroku  
 ✅ Tailwind  
-
+<br/><br/>
 
 # Časový harmonogram :calendar:  
 
