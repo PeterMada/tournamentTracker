@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 export const Scoreboard = () => {
   const [allScore, setAllScore] = useState([]);
+  const [roundDetail, setRoundDetail] = useState([]);
 
   useEffect(() => {
     const fetchScorebaord = async () => {
@@ -15,16 +16,23 @@ export const Scoreboard = () => {
         }
       );
       const parseRes = await response.json();
-      setAllScore(parseRes);
+
+      if (parseRes.users) {
+        setAllScore(parseRes.users);
+        setRoundDetail(parseRes.currentRound);
+      }
     };
 
     const personsListResults = fetchScorebaord().catch(console.error);
   }, []);
 
+  const handlePreviousRound = () => {};
+
   return (
     <>
       <h1 className='font-medium leading-tight text-5xl mt-0 mb-2 text-blue-600'>
-        Total Scoreboard
+        Total Scoreboard for{' '}
+        {`${roundDetail.round_month}. ${roundDetail.round_year}`}
       </h1>
       <div className='relative overflow-x-auto shadow-md sm:rounded-lg'>
         <table className='w-full text-sm text-left text-gray-500 dark:text-gray-400'>
@@ -75,6 +83,14 @@ export const Scoreboard = () => {
             })}
           </tbody>
         </table>
+      </div>
+      <div>
+        <Link
+          className='bg-blue-500 ml-2 mr-2 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
+          to='/newSeason'
+          onClick={handlePreviousRound}>
+          Start new season
+        </Link>
       </div>
     </>
   );
