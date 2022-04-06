@@ -1,4 +1,4 @@
-# Scenár
+# :scroll: Scenár   
 
 Webová aplikácia na zaznamenávanie a vyhodnocovanie výsledkov zápasov badmintonu. (inšpirácia https://www.vaseliga.cz)
 Hlavnou úlohou tejto aplikácie je zaznamenávať výsledky jednotlivých zápasov.
@@ -19,54 +19,56 @@ Sezóna trvá 4 mesiace (jar, leto, jeseň, zima). Každý sezóna má 4 kolá (
 **Kľúčové vlastnosti:**
 - oddelený frontend a backend
 - PostgreSQL
+<br/><br/>
 
-**Podporované prehliadače:** Posledné dve verzie
-- ✅ Google Chrome
-- ✅ Firefox
-- ✅ Microsoft Edge
-- ✅ Opera
+**:anchor:Podporované prehliadače**  <br/>
+Posledné dve verzie  
+✅ Google Chrome  
+✅ Firefox  
+✅ Microsoft Edge  
+✅ Opera  
+<br/><br/>
 
+# :hammer: Požiadavky 
 
-# Požiadavky
+✅ oddelený frontend a backend (REST Api)  
+⬜️ možnosť vytvárať časový harmonogram  
+✅ pridávanie sútažiacich  
+✅ pridávanie bodov za zápas  
+⬜️ vytváranie tabuliek  
+⬜️ export dát  
+✅ ukladanie dát  
+✅ dôraz na UX  
+✅ jednoduché UI  
+✅ dostupnosť (accessibility)  
+✅ responzívnosť  
+✅ dodržanie bežných štandardov  
+✅ podpora pre najnovšie prehliadače
+<br/><br/>
 
-- ✅ oddelený frontend a backend (REST Api)
-- ⬜️ možnosť vytvárať časový harmonogram
-- ✅ pridávanie sútažiacich
-- ✅ pridávanie bodov za zápas
-- ⬜️ vytváranie tabuliek
-- ⬜️ export dát
-- ✅ ukladanie dát
-- ✅ dôraz na UX
-- ✅ jednoduché UI
-- ✅ dostupnosť (accessibility)
-- ✅ responzívnosť
-- ✅ dodržanie bežných štandardov
-- ✅ podpora pre najnovšie prehliadače
-
-
-# Použité technológie
+# :pushpin: Použité technológie  
 
 ###### PERN - stack
-- ✅ PostgreSQL
-- ✅ Express
-- ✅ React
-- ✅ NodeJS
-- ✅ Heroku
-- ✅ Tailwind
+✅ PostgreSQL  
+✅ Express  
+✅ React  
+✅ NodeJS  
+✅ Heroku  
+✅ Tailwind  
+<br/><br/>
 
+# :calendar: Časový harmonogram   
 
-# Časový harmonogram
-
-- ✅ Analýza a návrh (3h)
-- ✅ Zoznámenie sa s technologiami (3h)
-- ✅ Návrh DB (3h)
-- ✅ Príprava backendu (3h)
-- ✅ Priprava frontendu (3h)
-- ✅ Vytvorenie routes pre API (3h)
-- ✅ Prihlásnie a registrácia (3h)
-- ✅ Dashboard (3h)
-- ✅ Pridanie formulárov (3h)
-- ✅ Vyhodnocovanie dát (3h)
-- ⬜️ Refaktoring (3h)
-- ⬜️ Testovanie (3h)
-- ⬜️ Nasadenie (3h)
+✅ Analýza a návrh (4h)  
+✅ Zoznámenie sa s technologiami (3h)  
+✅ Návrh DB (3h)  
+✅ Príprava backendu (4h)  
+✅ Priprava frontendu (4h)  
+✅ Vytvorenie routes pre API (3h)  
+✅ Prihlásnie a registrácia (3h)  
+✅ Dashboard (3h)  
+✅ Pridanie formulárov (3h)  
+✅ Vyhodnocovanie dát (3h)  
+⬜️ Refaktoring (3h)  
+⬜️ Testovanie (2h)  
+⬜️ Nasadenie (1h)  

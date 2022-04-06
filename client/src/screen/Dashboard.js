@@ -55,8 +55,8 @@ export const Dashboard = ({ setAuth }) => {
 
   return (
     <>
-      <h1 className='font-medium leading-tight text-5xl mt-0 mb-2 text-blue-600'>
-        Dashboard for {name}
+      <h1 className='font-medium leading-tight text-5xl mt-0 mb-10 text-blue-600'>
+        Dashboard
       </h1>
 
       {myGroup ? (
@@ -111,14 +111,20 @@ export const Dashboard = ({ setAuth }) => {
                         : ''}
                     </td>
                     <td className='px-6 py-4'>
-                      {firstPlayerObj
-                        ? `${firstPlayerObj.user_email}`
-                        : ''}
+                      {firstPlayerObj ? (
+                        <a
+                          href={`mailto:${firstPlayerObj.user_email}`}>{`${firstPlayerObj.user_email}`}</a>
+                      ) : (
+                        ''
+                      )}
                     </td>
                     <td className='px-6 py-4'>
-                      {firstPlayerObj
-                        ? `${secondPlayerObj.user_email}`
-                        : ''}
+                      {firstPlayerObj ? (
+                        <a
+                          href={`mailto:${secondPlayerObj.user_email}`}>{`${secondPlayerObj.user_email}`}</a>
+                      ) : (
+                        ''
+                      )}
                     </td>
                     <td className='px-6 py-4 '>
                       <span className='font-medium'>

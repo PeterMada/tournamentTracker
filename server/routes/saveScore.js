@@ -76,19 +76,115 @@ router.post('/', validinfo, async (req, res) => {
       'SELECT * FROM rounds WHERE round_current = TRUE'
     );
 
+    const playerOneCurrentScore = await pool.query(
+      'SELECT * FROM playerScore where score_player_id= $1 AND score_round_id = $2',
+      [firstPlayerId, currentRound.rows[0].round_id]
+    );
+
+    const playerTwoCurrentScore = await pool.query(
+      'SELECT * FROM playerScore where score_player_id= $1 AND score_round_id = $2',
+      [secondPlayerId, currentRound.rows[0].round_id]
+    );
+
+    const curentTotalPlayerOneScoreForGame =
+      playerOneCurrentScore.rows.length === 1
+        ? playerOneCurrentScore.rows[0].score_for_game
+        : 0;
+
+    const curentTotalPlayerTwoScoreForGame =
+      playerTwoCurrentScore.rows.length === 1
+        ? playerTwoCurrentScore.rows[0].score_for_game
+        : 0;
+
     const playerOneTotalScore = await pool.query(
       'UPDATE playerScore SET score_for_game = $1 WHERE score_player_id = $2 AND score_round_id = $3',
-      [scoreForFirstPlayer, firstPlayerId, currentRound.rows[0].round_id]
+      [
+        curentTotalPlayerOneScoreForGame + scoreForFirstPlayer,
+        firstPlayerId,
+        currentRound.rows[0].round_id,
+      ]
     );
-    console.log(scoreForFirstPlayer);
-    console.log(firstPlayerId);
-    console.log(currentRound.rows[0].round_id);
-    console.log('**************');
 
     const playerTwoTotalScore = await pool.query(
       'UPDATE playerScore SET score_for_game = $1 WHERE score_player_id = $2 AND score_round_id = $3',
-      [scoreForSecondPlayer, secondPlayerId, currentRound.rows[0].round_id]
+      [
+        curentTotalPlayerTwoScoreForGame + scoreForSecondPlayer,
+        secondPlayerId,
+        currentRound.rows[0].round_id,
+      ]
     );
+
+    // update score for position in current group
+    const currentGroup = await pool.query(
+      'SELECT * from groups WHERE group_round_id = $1 AND group_user_id = $2',
+      [currentRound.rows[0].round_id, firstPlayerId]
+    );
+
+    const allPlayerInCurrentGroup = await pool.query(
+      'SELECT * from playerScore WHERE score_round_id = $1 AND score_group_id = $2 ORDER BY score_for_game DESC',
+      [currentRound.rows[0].round_id, currentGroup.rows[0].group_number]
+    );
+
+    console.log(allPlayerInCurrentGroup.rows);
+    //const allPlayerScoreForGroupPromise =
+    //allPlayersFromCurrentGroup.rows.map(() => {});
+
+    const playerScorePromise = allPlayerInCurrentGroup.rows.map(
+      async (player, i) => {
+        let currentScoreForRank = 0;
+
+        if (allPlayerInCurrentGroup.rows.length === 5) {
+          switch (i) {
+            case 0:
+              currentScoreForRank = 14;
+              break;
+            case 1:
+              currentScoreForRank = 11;
+              break;
+            case 2:
+              currentScoreForRank = 0;
+              break;
+            case 3:
+              currentScoreForRank = -11;
+              break;
+            case 4:
+              currentScoreForRank = -14;
+              break;
+          }
+        } else {
+          switch (i) {
+            case 0:
+              currentScoreForRank = 14;
+              break;
+            case 1:
+              currentScoreForRank = 11;
+              break;
+            case 2:
+              currentScoreForRank = 0;
+              break;
+            case 3:
+              currentScoreForRank = 0;
+              break;
+            case 4:
+              currentScoreForRank = -11;
+              break;
+            case 5:
+              currentScoreForRank = -14;
+              break;
+            case 6:
+              currentScoreForRank = -16;
+              break;
+          }
+        }
+
+        const playerTwoTotalScore = await pool.query(
+          'UPDATE playerScore SET score_for_rank = $1 WHERE score_id = $2',
+          [currentScoreForRank, player.score_id]
+        );
+      }
+    );
+
+    const resultNewScoreTables = await Promise.all(playerScorePromise);
 
     res.json(scoreInsert.rows[0]);
   } catch (err) {

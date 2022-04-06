@@ -47,7 +47,7 @@ export const RecordScore = () => {
 
   return (
     <>
-      <h1 className='font-medium leading-tight text-5xl mt-0 mb-2 text-blue-600'>
+      <h1 className='font-medium leading-tight text-5xl mt-0 mb-10 text-blue-600'>
         Record score
       </h1>
       <Formik

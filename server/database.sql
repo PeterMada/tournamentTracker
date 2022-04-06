@@ -48,6 +48,7 @@ CREATE TABLE playerScore(
   score_for_game SMALLINT NOT NULL,
   score_for_rank  SMALLINT NOT NULL,
   score_round_id SMALLINT NOT NULL,
+  score_group_id SMALLINT,
 
   CONSTRAINT fk_player FOREIGN KEY(score_player_id) REFERENCES users(user_id)
 );
