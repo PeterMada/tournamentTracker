@@ -20,7 +20,8 @@ Sezóna trvá 4 mesiace (jar, leto, jeseň, zima). Každý sezóna má 4 kolá (
 - oddelený frontend a backend
 - PostgreSQL
 
-**Podporované prehliadače:** Posledné dve verzie
+**Podporované prehliadače:** :scroll: 
+Posledné dve verzie  
 ✅ Google Chrome  
 ✅ Firefox  
 ✅ Microsoft Edge  
