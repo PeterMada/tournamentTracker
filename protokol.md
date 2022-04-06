@@ -59,16 +59,16 @@ Posledné dve verzie
 
 # :calendar: Časový harmonogram   
 
-✅ Analýza a návrh (3h)  
+✅ Analýza a návrh (4h)  
 ✅ Zoznámenie sa s technologiami (3h)  
 ✅ Návrh DB (3h)  
-✅ Príprava backendu (3h)  
-✅ Priprava frontendu (3h)  
+✅ Príprava backendu (4h)  
+✅ Priprava frontendu (4h)  
 ✅ Vytvorenie routes pre API (3h)  
 ✅ Prihlásnie a registrácia (3h)  
 ✅ Dashboard (3h)  
 ✅ Pridanie formulárov (3h)  
 ✅ Vyhodnocovanie dát (3h)  
 ⬜️ Refaktoring (3h)  
-⬜️ Testovanie (3h)  
-⬜️ Nasadenie (3h)  
+⬜️ Testovanie (2h)  
+⬜️ Nasadenie (1h)  
