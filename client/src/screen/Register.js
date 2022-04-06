@@ -5,8 +5,8 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 
 export const Register = ({ setAuth }) => {
   return (
-    <>
-      <h1 className='font-medium leading-tight text-5xl mt-0 mb-2 text-blue-600'>
+    <div className='max-w-xl m-auto'>
+      <h1 className='font-medium leading-tight text-5xl mt-0 mb-10 text-blue-600'>
         Register
       </h1>
       <Formik
@@ -172,7 +172,7 @@ export const Register = ({ setAuth }) => {
               />
             </div>
 
-            <div className='flex items-center justify-between'>
+            <div className='flex flex-col items-end justify-end'>
               {!isSubmitting ? (
                 <button
                   className={
@@ -207,12 +207,14 @@ export const Register = ({ setAuth }) => {
                   Processing...
                 </span>
               )}
+
+              <Link className='mt-4' to='/login'>
+                Login
+              </Link>
             </div>
           </Form>
         )}
       </Formik>
-
-      <Link to='/login'>Login</Link>
-    </>
+    </div>
   );
 };

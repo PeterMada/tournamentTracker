@@ -46,8 +46,8 @@ router.post('/register', validInfo, async (req, res) => {
     }
 
     const playerScore = await pool.query(
-      'INSERT INTO playerScore (score_player_id, score_total_score, score_for_game, score_for_rank, score_round_id) VALUES ($1, $2, $3, $4, $5) RETURNING *',
-      [newUser.rows[0].user_id, 0, 0, 0, currentRoundId]
+      'INSERT INTO playerScore (score_player_id, score_total_score, score_for_game, score_for_rank, score_round_id, score_group_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
+      [newUser.rows[0].user_id, 0, 0, 0, currentRoundId, 0]
     );
 
     const token = jwtGenerator(newUser.rows[0].user_id);

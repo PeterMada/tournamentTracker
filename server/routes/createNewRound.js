@@ -14,6 +14,7 @@ router.get('/', authorization, async (req, res) => {
     const activeAllUsers = await pool.query(
       'UPDATE users SET user_active = true RETURNING user_id'
     );
+
     // No rounds
     let target;
     if (currentRound.rows.length === 0) {
@@ -40,6 +41,7 @@ router.get('/', authorization, async (req, res) => {
         [month, year, true]
       );
     }
+
     // Add match score + table score to sum score
     const allUsersScores = await pool.query(
       'SELECT * FROM playerScore WHERE score_round_id = $1',
@@ -111,7 +113,7 @@ router.get('/', authorization, async (req, res) => {
                 '-',
                 '-',
                 currentRoundId,
-                i,
+                k,
               ]
             );
           }
@@ -129,8 +131,13 @@ router.get('/', authorization, async (req, res) => {
 
         const playerCurrentGroup = await pool.query(
           'SELECT group_number FROM groups WHERE group_user_id = $1 AND group_round_id = $2',
-          [user.user_id, currentRound.rows[0].round_id]
+          [user.user_id, target.rows[0].round_id]
         );
+
+        console.log(user.user_id);
+        console.log(target.rows[0].round_id);
+        console.log(playerCurrentGroup.rows);
+        console.log('**********');
 
         const playerTotalScoreValue =
           playerTotalScore.rows.length > 0

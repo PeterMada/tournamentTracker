@@ -28,7 +28,9 @@ export const Scoreboard = () => {
 
   const handlePreviousRound = () => {};
 
-  return (
+  return allScore.length < 1 ? (
+    <p>Loading....</p>
+  ) : (
     <>
       <h1 className='font-medium leading-tight text-5xl mt-0 mb-2 text-blue-600'>
         Total Scoreboard for{' '}
@@ -83,14 +85,6 @@ export const Scoreboard = () => {
             })}
           </tbody>
         </table>
-      </div>
-      <div>
-        <Link
-          className='bg-blue-500 ml-2 mr-2 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
-          to='/newSeason'
-          onClick={handlePreviousRound}>
-          Start new season
-        </Link>
       </div>
     </>
   );
