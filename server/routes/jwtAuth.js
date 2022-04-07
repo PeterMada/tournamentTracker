@@ -23,10 +23,11 @@ router.post('/register', validInfo, async (req, res) => {
     const saltRound = 10;
     const salt = await bcrypt.genSalt(saltRound);
     const bcryptPassword = await bcrypt.hash(password, salt);
+    const time = new Date().toISOString();
 
     const newUser = await pool.query(
-      'INSERT INTO users (user_first_name, user_last_name, user_email, user_active, user_password) VALUES ($1, $2, $3, $4, $5) RETURNING *',
-      [firstName, lastName, email, false, bcryptPassword]
+      'INSERT INTO users (user_first_name, user_last_name, user_email, user_active, user_password, user_date_created) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
+      [firstName, lastName, email, false, bcryptPassword, time]
     );
 
     const currentRound = await pool.query(

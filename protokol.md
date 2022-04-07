@@ -32,11 +32,9 @@ Posledné dve verzie
 # :hammer: Požiadavky 
 
 ✅ oddelený frontend a backend (REST Api)  
-⬜️ možnosť vytvárať časový harmonogram  
 ✅ pridávanie sútažiacich  
 ✅ pridávanie bodov za zápas  
-⬜️ vytváranie tabuliek  
-⬜️ export dát  
+✅ vytváranie tabuliek  
 ✅ ukladanie dát  
 ✅ dôraz na UX  
 ✅ jednoduché UI  

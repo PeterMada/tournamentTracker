@@ -132,6 +132,9 @@ export const Login = ({ setAuth }) => {
                 </button>
                 <div className='mt-4'>
                   <Link to='/register'>Register</Link>
+                  <Link className='ml-4' to='/forgotpassword'>
+                    Forgot password?
+                  </Link>
                 </div>
               </div>
             </Form>
