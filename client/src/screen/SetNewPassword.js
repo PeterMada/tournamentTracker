@@ -1,32 +1,41 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 
-export const Forgotpassword = () => {
-  const navigate = useNavigate();
+export const SetNewPassword = () => {
+  const { user_id, token } = useParams();
   return (
     <div className='max-w-xl m-auto'>
       <h1 className='font-medium leading-tight text-5xl mt-0 mb-10 text-blue-600'>
-        Forgot password?
+        Set new password?
       </h1>
-      <p className='mb-4'>
-        Please enter your email to search for your account.
-      </p>
       <Formik
         initialValues={{
-          email: '',
+          password: '',
+          passwordConfirm: '',
         }}
         validate={(values) => {
           const errors = {};
 
-          if (!values.email) {
-            errors.email = 'Email field is required';
-          } else if (
-            !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+          if (!values.password) {
+            errors.password = 'Password Field Cannot be empty';
+          } else if (values.password.length < 8) {
+            errors.password = 'Password must be 8 characters long';
+          }
+
+          if (!values.passwordConfirm) {
+            errors.passwordConfirm =
+              'Confirm Password Field Cannot be empty';
+          }
+
+          if (
+            values.password &&
+            values.passwordConfirm &&
+            values.password !== values.passwordConfirm
           ) {
-            errors.email = 'Invalid email address';
+            errors.passwordConfirm = 'Password must be matching';
           }
 
           return errors;
@@ -34,24 +43,30 @@ export const Forgotpassword = () => {
         onSubmit={async (values, { setSubmitting }) => {
           try {
             const response = await fetch(
-              `${process.env.REACT_APP_API_URL}auth/forgotpassword`,
+              `${process.env.REACT_APP_API_URL}auth/setnewpassword`,
               {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                  'Content-Type': 'application/json',
+                  user_id: user_id,
+                  token: token,
+                },
 
                 body: JSON.stringify(values),
               }
             );
 
             const parseRes = await response.json();
-            if (parseRes.alright) {
-              toast.success('Email send succesfully');
-              navigate(`/dashboard`);
+            if (parseRes.token) {
+              localStorage.setItem('token', parseRes.token);
+              setAuth(true);
+              toast.success('Registered succesfully');
             } else {
+              setAuth(false);
               toast.error(parseRes);
             }
           } catch (err) {
-            toast.error('Oops, server error!');
+            toast.error('Oops, failed to fetch!');
           }
         }}>
         {({ isSubmitting, isValid, dirty }) => (
@@ -59,18 +74,36 @@ export const Forgotpassword = () => {
             <div className='mb-4'>
               <label
                 className='block text-gray-700 text-sm font-bold mb-2'
-                htmlFor='email'>
-                Email
+                htmlFor='password'>
+                Password
               </label>
               <Field
                 className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-                id='email'
-                name='email'
-                type='email'
+                id='password'
+                name='password'
+                type='password'
               />
               <ErrorMessage
                 className='text-red-500 text-xs mt-1 ml-1'
-                name='email'
+                name='password'
+                component='div'
+              />
+            </div>
+            <div className='mb-4'>
+              <label
+                className='block text-gray-700 text-sm font-bold mb-2'
+                htmlFor='passwordConfirm'>
+                Confirm Password
+              </label>
+              <Field
+                className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                id='passwordConfirm'
+                name='passwordConfirm'
+                type='password'
+              />
+              <ErrorMessage
+                className='text-red-500 text-xs mt-1 ml-1'
+                name='passwordConfirm'
                 component='div'
               />
             </div>

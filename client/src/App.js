@@ -131,6 +131,17 @@ export const App = () => {
               )
             }
           />
+          <Route
+            exact
+            path='/resetpassword/:user_id/:token'
+            element={
+              isAuthenticated ? (
+                <Navigate replace to='/dashboard' />
+              ) : (
+                <Forgotpassword />
+              )
+            }
+          />
         </Routes>
       </div>
     </BrowserRouter>
