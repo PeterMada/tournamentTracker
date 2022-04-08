@@ -46,7 +46,7 @@ export const Forgotpassword = () => {
             const parseRes = await response.json();
             if (parseRes.alright) {
               toast.success('Email send succesfully');
-              navigate(`/dashboard`);
+              navigate(`/login`);
             } else {
               toast.error(parseRes);
             }
@@ -83,7 +83,7 @@ export const Forgotpassword = () => {
                   }
                   type='submit'
                   disabled={!dirty}>
-                  Save
+                  Send
                 </button>
               ) : (
                 <span

@@ -17,6 +17,7 @@ import { Dashboard } from '../src/screen/Dashboard';
 import { Scoreboard } from './screen/Scoreboard';
 import { RecordScore } from './screen/RecordScore';
 import { Forgotpassword } from './screen/Forgotpassword';
+import { SetNewPassword } from './screen/SetNewPassword';
 
 toast.configure();
 
@@ -133,12 +134,12 @@ export const App = () => {
           />
           <Route
             exact
-            path='/resetpassword/:user_id/:token'
+            path='/setnewpassword/:token'
             element={
               isAuthenticated ? (
                 <Navigate replace to='/dashboard' />
               ) : (
-                <Forgotpassword />
+                <SetNewPassword setAuth={setAuth} />
               )
             }
           />

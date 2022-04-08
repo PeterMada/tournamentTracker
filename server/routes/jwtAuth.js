@@ -124,14 +124,14 @@ router.post('/forgotpassword', validInfo, async (req, res) => {
     if (user.rows.length === 1) {
       const token = jwtGenerator(user.rows[0].user_id);
 
-      const resetUrl = `${process.env.EMAIL_SITEURL}setnewpassword/${user.rows[0].user_id}/${token}`;
+      const resetUrl = `${process.env.EMAIL_SITEURL}setnewpassword/${token}`;
 
       let info = await transporter.sendMail({
         from: fromMe,
         to: user.rows[0].user_email,
         subject: 'Pasword reset',
-        text: 'Reset your password: ',
-        html: `Hi, <br />Reset your password: ${resetUrl}`,
+        text: `Reset your password: ${resetUrl}`,
+        html: `Hi, <br />Reset your password: <a href="${resetUrl}">here</a>.`,
       });
 
       if (info.accepted.length === 1) {
@@ -149,20 +149,18 @@ router.post('/forgotpassword', validInfo, async (req, res) => {
 router.post('/setnewpassword', validInfo, async (req, res) => {
   try {
     const { password } = req.body;
-    const userIdFromEmail = req.headers['user_id'];
     const tokenFromEmail = req.headers['token'];
 
-    const payload = jwt.verify(jwtToken, process.env.jwtSecret);
+    const payload = jwt.verify(tokenFromEmail, process.env.jwtSecret);
 
-    req.user = payload.user;
-
+    const userFromPayload = payload.user;
     const user = await pool.query(
-      'SELECT * FROM users WHERE user_email = $1',
-      [email]
+      'SELECT user_id, user_first_name, user_last_name, user_email FROM users WHERE user_id = $1',
+      [userFromPayload]
     );
 
-    if (user.rows.length !== 0) {
-      return res.status(401).json('User already exist!');
+    if (user.rows.length !== 1) {
+      return res.status(401).json('User does not exist!');
     }
 
     const saltRound = 10;
@@ -170,34 +168,12 @@ router.post('/setnewpassword', validInfo, async (req, res) => {
     const bcryptPassword = await bcrypt.hash(password, salt);
     const time = new Date().toISOString();
 
-    const newUser = await pool.query(
-      'INSERT INTO users (user_first_name, user_last_name, user_email, user_active, user_password, user_date_created) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
-      [firstName, lastName, email, false, bcryptPassword, time]
+    const savedUsserPassword = await pool.query(
+      'UPDATE users SET user_password = $1 WHERE user_id = $2',
+      [bcryptPassword, userFromPayload]
     );
 
-    const currentRound = await pool.query(
-      'SELECT * FROM rounds WHERE round_current = TRUE'
-    );
-
-    let currentRoundId = 0;
-
-    if (currentRound.rows.length === 0) {
-      target = await pool.query(
-        'INSERT INTO rounds (round_month, round_year, round_current) VALUES ($1, $2, $3) RETURNING *',
-        [4, 2022, true]
-      );
-      currentRoundId = target.rows[0].round_id;
-    } else {
-      currentRoundId = currentRound.rows[0].round_id;
-    }
-
-    const playerScore = await pool.query(
-      'INSERT INTO playerScore (score_player_id, score_total_score, score_for_game, score_for_rank, score_round_id, score_group_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
-      [newUser.rows[0].user_id, 0, 0, 0, currentRoundId, 0]
-    );
-
-    const token = jwtGenerator(newUser.rows[0].user_id);
-
+    const token = jwtGenerator(userFromPayload);
     res.json({ token });
   } catch (err) {
     console.log(err.message);

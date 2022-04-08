@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 
-export const SetNewPassword = () => {
+export const SetNewPassword = ({ setAuth }) => {
   const { user_id, token } = useParams();
+  const navigate = useNavigate();
   return (
     <div className='max-w-xl m-auto'>
       <h1 className='font-medium leading-tight text-5xl mt-0 mb-10 text-blue-600'>
@@ -60,13 +62,14 @@ export const SetNewPassword = () => {
             if (parseRes.token) {
               localStorage.setItem('token', parseRes.token);
               setAuth(true);
-              toast.success('Registered succesfully');
+              toast.success('Password changed succesfully');
+              navigate(`/dashboard`);
             } else {
               setAuth(false);
               toast.error(parseRes);
             }
           } catch (err) {
-            toast.error('Oops, failed to fetch!');
+            toast.error('Oops, server error!');
           }
         }}>
         {({ isSubmitting, isValid, dirty }) => (
