@@ -9,11 +9,12 @@ Sezóna trvá 4 mesiace (jar, leto, jeseň, zima). Každý sezóna má 4 kolá (
 | 3:0 | 3:1 | 3:2 | 2:3 | 1:3 | 0:3 | S:S | 3:S | S:3 |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 |  7  |  6  |  5  |  2  |  1  |  0  | -2  |  6  |  0  |
+
 <br/><br/>
 
 **Body za skore:**
 | Poradie | Body | Body v prípade viac ako 5tich hráčov v skupine |
-| --- | --- | --- |
+| --- | :---: | :---: |
 | 1.  | 14  | 14 |
 | 2.  | 11  | 11 |
 | 3.  | 0  | 0 |
