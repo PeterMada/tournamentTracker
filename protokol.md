@@ -5,6 +5,26 @@ Hlavnou úlohou tejto aplikácie je zaznamenávať výsledky jednotlivých zápa
 
 Sezóna trvá 4 mesiace (jar, leto, jeseň, zima). Každý sezóna má 4 kolá (každý mesiac jedno kolo). Hráč musí odohrať každý mesiac všetky zápasy ktoré má v skupine. Na základe odohraných zápasov získava úroveň. Na základe tejto úrovne je priradený do skupiny. Každá úroveň má minimálne 4 účastníkov.  Na jednej úrovni môže byť viac skupín (napr.: úroveň 4. A a úroveň 4. B). 
 
+**Body za skore:**
+| 3:0 | 3:1 | 3:2 | 2:3 | 1:3 | 0:3 | S:S | 3:S | S:3 |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+|  7  |  6  |  5  |  2  |  1  |  0  | -2  |  6  |  0  |
+
+<br/><br/>
+
+**Body za skore:**
+| Poradie | Body | Body v prípade viac ako 5tich hráčov v skupine |
+| --- | :---: | :---: |
+| 1.  | 14  | 14 |
+| 2.  | 11  | 11 |
+| 3.  | 0  | 0 |
+| 4.  | -11  | 0 |
+| 5.  | -14  | -11 |
+| 6.  |   | 	-14 |
+| 7	  |   | -16 |
+
+
+<br/><br/>
 
 **Štruktúra:** Web aplikácia
 
@@ -67,9 +87,9 @@ Posledné dve verzie
 ✅ Dashboard (3h)  
 ✅ Pridanie formulárov (3h)  
 ✅ Vyhodnocovanie dát (3h)  
-⬜️ Refaktoring (3h)  
-⬜️ Testovanie (2h)  
-⬜️ Nasadenie (1h)  
+✅ Refaktoring (3h)  
+✅ Testovanie (2h)  
+✅ Nasadenie (1h)  
 
 <br/><br/>
 <br/><br/>
@@ -108,3 +128,4 @@ Posledné dve verzie
 **Zobrazenie celkového skóre** – hráč si môže zobraziť tabuľku  aktuálneho poradia.  
 **Vygenerovanie nového kola** – administrátor má možnosť vygenerovať nové kolo.  
 **Generovanie nového kola systémom** – nové kolo generuje systém vždy na začiatku mesiaca.  
+
