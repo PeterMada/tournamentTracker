@@ -12,7 +12,7 @@ CREATE TABLE users(
   user_password VARCHAR(255) NOT NULL,
   user_email_verified BOOLEAN,
   user_active BOOLEAN DEFAULT FALSE,
-  user_date_created DATE,
+  user_date_created timestamptz,
   user_last_login DATE,
   user_deleted BOOLEAN DEFAULT FALSE,
   PRIMARY KEY (user_id)

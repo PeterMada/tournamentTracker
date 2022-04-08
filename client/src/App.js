@@ -16,6 +16,8 @@ import { Login } from '../src/screen/Login';
 import { Dashboard } from '../src/screen/Dashboard';
 import { Scoreboard } from './screen/Scoreboard';
 import { RecordScore } from './screen/RecordScore';
+import { Forgotpassword } from './screen/Forgotpassword';
+import { SetNewPassword } from './screen/SetNewPassword';
 
 toast.configure();
 
@@ -50,7 +52,7 @@ export const App = () => {
 
   return (
     <BrowserRouter>
-      <div className='container max-w-5xl mx-auto m-8 bg-white py-8'>
+      <div className=' container max-w-5xl mx-auto  py-8'>
         <Routes>
           <Route
             exact
@@ -116,6 +118,28 @@ export const App = () => {
                 <RecordScore />
               ) : (
                 <Navigate replace to='/login' />
+              )
+            }
+          />
+          <Route
+            exact
+            path='/forgotpassword'
+            element={
+              isAuthenticated ? (
+                <Navigate replace to='/dashboard' />
+              ) : (
+                <Forgotpassword />
+              )
+            }
+          />
+          <Route
+            exact
+            path='/setnewpassword/:token'
+            element={
+              isAuthenticated ? (
+                <Navigate replace to='/dashboard' />
+              ) : (
+                <SetNewPassword setAuth={setAuth} />
               )
             }
           />
