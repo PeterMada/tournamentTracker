@@ -52,7 +52,7 @@ export const App = () => {
 
   return (
     <BrowserRouter>
-      <div className='container max-w-5xl mx-auto m-8 bg-white py-8'>
+      <div className=' container max-w-5xl mx-auto  py-8'>
         <Routes>
           <Route
             exact
