@@ -4,6 +4,7 @@ Webová aplikácia na zaznamenávanie a vyhodnocovanie výsledkov zápasov badmi
 Hlavnou úlohou tejto aplikácie je zaznamenávať výsledky jednotlivých zápasov.
 
 Každý mesiac sa odohráva jedno kolo. Hráč musí odohrať každý mesiac všetky zápasy ktoré má v skupine. Na základe odohraných zápasov získava úroveň. Na základe tejto úrovne je priradený do skupiny. Každá úroveň má minimálne 5 účastníkov. 
+<br/><br/>
 
 **Body za skore:**
 | 3:0 | 3:1 | 3:2 | 2:3 | 1:3 | 0:3 | S:S | 3:S | S:3 |
@@ -12,7 +13,7 @@ Každý mesiac sa odohráva jedno kolo. Hráč musí odohrať každý mesiac vš
 
 <br/><br/>
 
-**Body za skore:**
+**Body za poradie v skupne:**
 | Poradie | Body | Body v prípade viac ako 5tich hráčov v skupine |
 | --- | :---: | :---: |
 | 1.  | 14  | 14 |
