@@ -3,7 +3,7 @@
 Webová aplikácia na zaznamenávanie a vyhodnocovanie výsledkov zápasov badmintonu. (inšpirácia https://www.vaseliga.cz)
 Hlavnou úlohou tejto aplikácie je zaznamenávať výsledky jednotlivých zápasov.
 
-Každý mesiac sa odohráva jedno kolo. Hráč musí odohrať každý mesiac všetky zápasy ktoré má v skupine. Na základe odohraných zápasov získava úroveň. Na základe tejto úrovne je priradený do skupiny. Každá úroveň má minimálne 4 účastníkov.  Na jednej úrovni môže byť viac skupín (napr.: úroveň 4. A a úroveň 4. B). 
+Každý mesiac sa odohráva jedno kolo. Hráč musí odohrať každý mesiac všetky zápasy ktoré má v skupine. Na základe odohraných zápasov získava úroveň. Na základe tejto úrovne je priradený do skupiny. Každá úroveň má minimálne 5 účastníkov. 
 
 **Body za skore:**
 | 3:0 | 3:1 | 3:2 | 2:3 | 1:3 | 0:3 | S:S | 3:S | S:3 |
